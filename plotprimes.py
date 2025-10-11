@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-
 import argparse
 from typing import Generator
-
 
 from matplotlib import pyplot as plt
 import numpy as np
 
 
 def is_prime(x: int) -> bool:
+    if x < 2:
+        return False
     for divisor in range(2, int(x**0.5) + 1):
         if x % divisor == 0:
             return False
@@ -27,7 +27,7 @@ def get_primes(n: int) -> Generator[int]:
 
 def plot_primes(n: int, colormap: str) -> None:
     fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
-    ax.scatter(list(get_primes(n)), np.arange(n), s=0.7, c=np.arange(n), cmap=colormap)
+    ax.scatter(list(get_primes(n)), np.arange(n), s=1, c=np.arange(n), cmap=colormap)
 
     ax.grid(False)
     ax.set_axis_off()

@@ -28,8 +28,6 @@
                 python-pkgs: with python-pkgs; [
                   matplotlib
                   numpy
-                  setuptools
-                  build
                 ]
               ))
             ];

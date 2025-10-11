@@ -9,7 +9,7 @@ python3Packages.buildPythonApplication {
   src = lib.fileset.toSource {
     root = ./.;
     fileset = lib.fileset.unions [
-      ./src
+      ./plotprimes.py
       ./pyproject.toml
     ];
   };

@@ -2,7 +2,7 @@
 #! nix-shell -i python3 --pure
 #! nix-shell -p 'python3.withPackages (pp: with pp; [matplotlib numpy])'
 #! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/0b4defa2584313f3b781240b29d61f6f9f7e0df3.tar.gz
-# This is a reproducible script that does not require any dependencies to be
+# This is a reproducible script that does not require any dependencies to be 
 # installed. You must have Nix installed to run it as is.
 import argparse
 from typing import Generator
@@ -32,8 +32,8 @@ def get_primes(n: int) -> Generator[int]:
 
 def plot_primes(n: int, colormap: str) -> None:
     fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
-
     ax.scatter(list(get_primes(n)), np.arange(n), s=1, c=np.arange(n), cmap=colormap)
+
     ax.grid(False)
     ax.set_axis_off()
 
@@ -45,12 +45,27 @@ def plot_primes(n: int, colormap: str) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        prog="plot", description="Plot primes in polar coordinate system"
+        prog="plotprimes",
+        description="Plot prime numbers in a polar coordinate system",
     )
-    parser.add_argument("-n", type=int, default=100)
-    parser.add_argument("-c", type=str, default="twilight")
+    parser.add_argument(
+        "-n",
+        "--number",
+        type=int,
+        metavar="int",
+        default=100,
+        help="number of primes to plot (default 100)",
+    )
+    parser.add_argument(
+        "-c",
+        "--colormap",
+        type=str,
+        metavar="str",
+        default="twilight",
+        help='name of colormap to use for plot (default "twilight")',
+    )
     args = parser.parse_args(argv)
-    plot_primes(args.n, args.c)
+    plot_primes(args.number, args.colormap)
 
 
 if __name__ == "__main__":

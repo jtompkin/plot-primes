@@ -33,8 +33,6 @@ def get_primes(n: int) -> Generator[int]:
 def plot_primes(n: int, colormap: str) -> None:
     fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
     ax.scatter(list(get_primes(n)), np.arange(n), s=1, c=np.arange(n), cmap=colormap)
-
-    ax.grid(False)
     ax.set_axis_off()
 
     fig.set_facecolor("black")

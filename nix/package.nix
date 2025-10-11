@@ -7,10 +7,10 @@ python3Packages.buildPythonApplication {
   version = "0.0.1";
   pyproject = true;
   src = lib.fileset.toSource {
-    root = ./.;
+    root = ../.;
     fileset = lib.fileset.unions [
-      ./plotprimes.py
-      ./pyproject.toml
+      ../plotprimes.py
+      ../pyproject.toml
     ];
   };
   build-system = [ python3Packages.setuptools ];

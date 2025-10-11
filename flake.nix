@@ -1,5 +1,5 @@
 {
-  description = "Making plots with Python";
+  description = "Plot prime numbers with Python";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -15,14 +15,14 @@
     {
       packages = forAllSystems (
         system: pkgs: {
-          plot-primes = pkgs.callPackage ./package.nix { };
+          plot-primes = pkgs.callPackage ./nix/package.nix { };
           default = self.packages.${system}.plot-primes;
         }
       );
       devShells = forAllSystems (
         _: pkgs: {
           default = pkgs.mkShell {
-            name = "plotting";
+            name = "plot-primes";
             packages = [
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [

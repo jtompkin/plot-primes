@@ -6,23 +6,30 @@
   };
 
   outputs =
-    { nixpkgs, ... }:
+    { self, nixpkgs }:
     let
       inherit (nixpkgs) lib;
       allSystems = [ "x86_64-linux" ];
       forAllSystems = f: lib.genAttrs allSystems (system: f system nixpkgs.legacyPackages.${system});
     in
     {
-      devShells = forAllSystems (
+      packages = forAllSystems (
         system: pkgs: {
+          plot-primes = pkgs.callPackage ./package.nix { };
+          default = self.packages.${system}.plot-primes;
+        }
+      );
+      devShells = forAllSystems (
+        _: pkgs: {
           default = pkgs.mkShell {
             name = "plotting";
             packages = [
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
                   matplotlib
-                  pandas
                   numpy
+                  setuptools
+                  build
                 ]
               ))
             ];

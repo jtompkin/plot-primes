@@ -38,16 +38,15 @@ def plot_primes(n: int, colormap: str) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        prog="plotprimes",
-        description="Plot prime numbers in a polar coordinate system",
+        description="Plot prime numbers in a polar coordinate system"
     )
     parser.add_argument(
         "-n",
         "--number",
         type=int,
         metavar="int",
-        default=100,
-        help="number of primes to plot (default 100)",
+        default=1000,
+        help="number of primes to plot (default 1000)",
     )
     parser.add_argument(
         "-c",

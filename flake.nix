@@ -30,6 +30,7 @@
                   numpy
                 ]
               ))
+              pkgs.entr
             ];
           };
         }

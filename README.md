@@ -13,7 +13,7 @@ Download [`plotprimes.py`](https://github.com/jtompkin/plot-primes/blob/main/plo
 The flake exposes `plot-primes` as the default package:
 
 ```bash
-nix run 'github:jtompkin/plotprimes' -- -n 10000
+nix run 'github:jtompkin/plot-primes' -- -n 10000
 ```
 
 If you're feeling spicy, you can download the [`nix/plotprimes.py`](https://github.com/jtompkin/plot-primes/blob/main/nix/plotprimes.py) script and run it directly. This is a reproducible interpreted script&mdash;all you need is Nix, it will run in an environment with all dependencies satisfied automagically.

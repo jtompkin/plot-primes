@@ -15,8 +15,8 @@
     {
       packages = forAllSystems (
         system: pkgs: {
-          plot-primes = pkgs.callPackage ./nix/package.nix { };
-          default = self.packages.${system}.plot-primes;
+          plotprimes = pkgs.callPackage ./nix/package.nix { };
+          default = self.packages.${system}.plotprimes;
         }
       );
       devShells = forAllSystems (
@@ -24,13 +24,14 @@
           default = pkgs.mkShell {
             name = "plot-primes";
             packages = [
+              pkgs.uv
+              pkgs.entr
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
                   matplotlib
-                  numpy
+                  build
                 ]
               ))
-              pkgs.entr
             ];
           };
         }

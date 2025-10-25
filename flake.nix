@@ -29,6 +29,7 @@
           default = pkgs.mkShell {
             name = "plot-primes";
             packages = [
+              pkgs.ruff
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
                   matplotlib

@@ -1,30 +1,43 @@
 #!/usr/bin/env python3
 import argparse
 from math import log
+from typing import Generator
 
 from matplotlib import pyplot as plt
 import numpy as np
 
 
 def get_upper_limit(n: int) -> int:
+    """Get the approximate upper limit of the `n`th prime number"""
     if n < 6:
         return 15
     return int(n * (log(n) + log(log(n)))) + 1
 
 
-def get_primes(n: int) -> list[int]:
+def get_primes(n: int) -> Generator[int]:
+    """
+    Get at least `n` prime numbers. Will return more than `n` numbers due to
+    approximating the upper limit of the `n`th prime number. You can truncate the list
+    by doing something like this:
+    ```python
+    n = 10000
+    list(get_primes(n))[:n]
+    ```
+    """
     limit = get_upper_limit(n)
     is_prime = np.ones(limit)
     is_prime[:2] = 0
     for i in range(2, int(limit**0.5) + 1):
         if is_prime[i]:
             is_prime[i * i : limit + 1 : i] = 0
-    return [i for i, b in enumerate(is_prime) if b]
+    return (i for i, b in enumerate(is_prime) if b)
 
 
 def plot_primes(n: int, colormap: str) -> None:
     fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
-    ax.scatter(get_primes(n)[:n], np.arange(n), s=0.5, c=np.arange(n), cmap=colormap)
+    ax.scatter(
+        list(get_primes(n))[:n], np.arange(n), s=0.5, c=np.arange(n), cmap=colormap
+    )
     ax.set_axis_off()
 
     fig.set_facecolor("black")

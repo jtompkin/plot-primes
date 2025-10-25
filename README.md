@@ -22,7 +22,7 @@ If you're feeling spicy, you can download the [`nix/plotprimes.py`](https://gith
 
 ### Flags
 
-- `-n`: `int` Number of primes to plot. Be careful, this script uses the ultra-inefficient trial division method of finding primes. (default 1000)
+- `-n`: `int` Number of primes to plot. (default 1000)
 - `-c`: `str` [Matplotlib colormap](https://matplotlib.org/stable/users/explain/colors/colormaps.html) name. (default "twilight")
 
 ## Build it

@@ -14,22 +14,26 @@
     in
     {
       packages = forAllSystems (
-        system: pkgs: {
-          plotprimes = pkgs.callPackage ./nix/package.nix { };
+        system: pkgs:
+        let
+          plotprimesCombined = pkgs.callPackage ./nix/package.nix { };
+        in
+        {
+          plotprimes = plotprimesCombined.application;
+          plotprimes-lib = plotprimesCombined.library;
           default = self.packages.${system}.plotprimes;
         }
       );
       devShells = forAllSystems (
-        _: pkgs: {
+        system: pkgs: {
           default = pkgs.mkShell {
             name = "plot-primes";
             packages = [
-              pkgs.uv
-              pkgs.entr
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
                   matplotlib
                   build
+                  self.packages.${system}.plotprimes-lib
                 ]
               ))
             ];

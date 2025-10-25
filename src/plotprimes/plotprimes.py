@@ -25,11 +25,11 @@ def get_primes(n: int) -> Generator[int]:
     ```
     """
     limit = get_upper_limit(n)
-    is_prime = np.ones(limit)
-    is_prime[:2] = 0
+    is_prime = np.ones(limit, dtype=np.bool)
+    is_prime[:2] = np.bool(False)
     for i in range(2, int(limit**0.5) + 1):
         if is_prime[i]:
-            is_prime[i * i : limit + 1 : i] = 0
+            is_prime[i * i : limit + 1 : i] = np.bool(False)
     return (i for i, b in enumerate(is_prime) if b)
 
 

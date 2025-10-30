@@ -9,9 +9,14 @@ let
     pyproject = true;
     src = lib.fileset.toSource {
       root = ../.;
-      fileset = lib.fileset.union ../src ../pyproject.toml;
+      fileset = lib.fileset.unions [
+        ../pyproject.toml
+        ../tests
+        ../src
+      ];
     };
     build-system = [ python3Packages.setuptools ];
+    nativeCheckInputs = [ python3Packages.pytestCheckHook ];
     dependencies = with python3Packages; [
       matplotlib
     ];

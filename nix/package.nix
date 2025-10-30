@@ -19,5 +19,5 @@ let
 in
 {
   application = python3Packages.buildPythonApplication recipe;
-  library = python3Packages.buildPythonPackage recipe;
+  library = python3Packages.buildPythonPackage (recipe // { pname = "plotprimes-lib"; });
 }

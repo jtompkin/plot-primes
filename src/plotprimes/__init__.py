@@ -1,1 +1,1 @@
-from .plotprimes import main
+from .plotprimes import *

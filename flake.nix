@@ -16,11 +16,11 @@
       packages = forAllSystems (
         system: pkgs:
         let
-          plotprimesCombined = pkgs.callPackage ./nix/package.nix { };
+          plotprimes = pkgs.callPackage ./nix/package.nix { };
         in
         {
-          plotprimes = plotprimesCombined.application;
-          plotprimes-lib = plotprimesCombined.library;
+          plotprimes = plotprimes.application;
+          plotprimes-lib = plotprimes.library;
           default = self.packages.${system}.plotprimes;
         }
       );

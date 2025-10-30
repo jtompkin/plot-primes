@@ -11,7 +11,9 @@ LOW_PRIME = 2
 class TestGetUpperLimit(unittest.TestCase):
     def test_low(self):
         for i in range(-1, 7):
-            self.assertEqual(plotprimes.get_upper_limit(i), 15)
+            self.assertEqual(
+                plotprimes.get_upper_limit(i), 15, f"get_upper_limit({i}) != 15"
+            )
 
     def test_high(self):
         self.assertGreaterEqual(plotprimes.get_upper_limit(HIGH_N), HIGH_PRIME)

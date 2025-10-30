@@ -29,7 +29,7 @@ def get_primes(n: int) -> Generator[int]:
     is_prime[:2] = np.bool(False)
     for i in range(2, int(limit**0.5) + 1):
         if is_prime[i]:
-            is_prime[i * i : limit + 1 : i] = np.bool(False)
+            is_prime[i * i :: i] = np.bool(False)
     return (i for i, b in enumerate(is_prime) if b)
 
 

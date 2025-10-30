@@ -30,6 +30,9 @@
             name = "plot-primes";
             packages = [
               pkgs.ruff
+              pkgs.pyright
+              pkgs.just
+              pkgs.just-lsp
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
                   matplotlib

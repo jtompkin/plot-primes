@@ -1,6 +1,6 @@
 [project]
 name = "plotprimes"
-version = "0.0.1"
+version = "1.0.0"
 description = "Plot prime numbers on a polar coordinate system"
 readme = "README.md"
 authors = [

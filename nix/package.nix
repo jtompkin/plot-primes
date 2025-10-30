@@ -5,7 +5,7 @@
 let
   recipe = {
     pname = "plotprimes";
-    version = "0.0.1";
+    version = "1.0.0";
     pyproject = true;
     src = lib.fileset.toSource {
       root = ../.;

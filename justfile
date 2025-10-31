@@ -1,14 +1,15 @@
 alias t := test
 alias b := build
 
+nixpkgsRev := "0b4defa2584313f3b781240b29d61f6f9f7e0df3"
+nixScriptFile := "nix/plotprimes.py"
 nixShebang := '''
     #!/usr/bin/env nix-shell
     #! nix-shell -i python3 --pure
     #! nix-shell -p 'python3.withPackages (pp: [pp.matplotlib])'
-    #! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/0b4defa2584313f3b781240b29d61f6f9f7e0df3.tar.gz
+''' + '#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/' + nixpkgsRev + ".tar.gz\n" + '''
     # This is a reproducible interpreted script that only requires Nix to run.
     # See: https://nix.dev/tutorials/first-steps/reproducible-scripts.html'''
-nixScriptFile := "nix/plotprimes.py"
 
 test:
     PYTHONPATH=src python tests/test_plotprimes.py -v

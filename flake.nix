@@ -32,6 +32,7 @@
               pkgs.ruff
               pkgs.pyright
               pkgs.just
+              pkgs.uv
               pkgs.just-lsp
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [

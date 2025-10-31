@@ -8,25 +8,23 @@ such.
 ### Directly
 
 Download
-[`plotprimes.py`](https://github.com/jtompkin/plot-primes/blob/main/plotprimes.py)
+[`plotprimes.py`](src/plotprimes/plotprimes.py)
 and run it with Python. This script requires
-[`numpy`](https://pypi.org/project/numpy/) and
 [`matplotlib`](https://pypi.org/project/matplotlib/).
 
 ### Nix
 
-The flake exposes `plot-primes` as the default package:
+The flake exposes `plotprimes` as the default package:
 
 ```bash
 nix run 'github:jtompkin/plot-primes' -- -h
 ```
 
 If you're feeling spicy, you can download the
-[`nix/plotprimes.py`](https://github.com/jtompkin/plot-primes/blob/main/nix/plotprimes.py)
+[`nix/plotprimes.py`](nix/plotprimes.py)
 script and run it directly. This is a reproducible interpreted script: all you
-need is Nix, it will run in an environment with all dependencies satisfied
+need is Nix; it will run in an environment with all dependencies satisfied
 automagically.
-
 
 ## Use it
 

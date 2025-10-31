@@ -1,5 +1,6 @@
 alias t := test
 alias b := build
+alias u := upload
 
 nixpkgsRev := "0b4defa2584313f3b781240b29d61f6f9f7e0df3"
 nixScriptFile := "nix/plotprimes.py"

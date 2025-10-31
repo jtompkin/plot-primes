@@ -7,10 +7,14 @@ such.
 
 ### Directly
 
-Download
+- Download
 [`plotprimes.py`](src/plotprimes/plotprimes.py)
 and run it with Python. This script requires
 [`matplotlib`](https://pypi.org/project/matplotlib/).
+- OR: Install from [PyPi](https://pypi.org/project/plotprimes)
+using whatever people use to install Python packages nowadays.
+- OR: Install a wheel from the
+[releases](https://github.com/jtompkin/plot-primes/releases) page.
 
 ### Nix
 

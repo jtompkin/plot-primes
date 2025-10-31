@@ -38,6 +38,7 @@
                 python-pkgs: with python-pkgs; [
                   matplotlib
                   build
+                  twine
                   self.packages.${system}.plotprimes-lib
                 ]
               ))

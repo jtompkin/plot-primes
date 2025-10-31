@@ -21,3 +21,6 @@ make-nix-script:
 
 build: test make-nix-script
     python -m build --installer uv
+
+upload token repo="pypi": build
+    python -m twine upload -u __token__ -p '{{ token }}' -r '{{ repo }}' dist/*

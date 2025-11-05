@@ -21,7 +21,17 @@
         {
           plotprimes = plotprimes.application;
           plotprimes-lib = plotprimes.library;
-          default = self.packages.${system}.plotprimes;
+          default = self.packages.${system}.plotprimes-lib;
+        }
+      );
+      apps = forAllSystems (
+        system: pkgs: {
+          plotprimes = {
+            type = "app";
+            program = lib.getExe self.packages.${system}.plotprimes;
+            meta.description = "Run plotprimes, a tool that plots primes in a polar coordinate system";
+          };
+          default = self.apps.${system}.plotprimes;
         }
       );
       devShells = forAllSystems (
@@ -29,17 +39,17 @@
           default = pkgs.mkShell {
             name = "plot-primes";
             packages = [
-              pkgs.ruff
-              pkgs.pyright
               pkgs.just
-              pkgs.uv
               pkgs.just-lsp
+              pkgs.pyright
+              pkgs.ruff
+              pkgs.uv
               (pkgs.python3.withPackages (
                 python-pkgs: with python-pkgs; [
-                  matplotlib
-                  build
-                  twine
                   self.packages.${system}.plotprimes-lib
+                  build
+                  matplotlib
+                  twine
                 ]
               ))
             ];

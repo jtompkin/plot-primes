@@ -20,6 +20,7 @@ let
     dependencies = with python3Packages; [
       matplotlib
     ];
+    meta.mainProgram = recipe.pname;
   };
 in
 {

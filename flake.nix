@@ -35,23 +35,47 @@
         }
       );
       devShells = forAllSystems (
-        system: pkgs: {
+        system: pkgs:
+        let
+          customPython = pkgs.python3.withPackages (
+            python-pkgs: with python-pkgs; [
+              self.packages.${system}.plotprimes-lib
+              build
+              matplotlib
+              twine
+            ]
+          );
+          just-lsp =
+            {
+              rustPlatform,
+              fetchFromGitHub,
+              nix-update-script,
+            }:
+            rustPlatform.buildRustPackage (finalAttrs: {
+              pname = "just-lsp";
+              version = "0.2.8";
+              src = fetchFromGitHub {
+                owner = "terror";
+                repo = "just-lsp";
+                rev = finalAttrs.version;
+                hash = "sha256-QwpChzZ+zC4MoVp6kNqbNF6+p4Rsd0KJfVuKPyxnnZU=";
+              };
+              cargoHash = "sha256-j/qLLyt9Sl1cXfNkKsyEYL/MQbxRMhni6uGmRVI+Xd8=";
+              passthru.updateScript = nix-update-script { };
+              meta.mainProgram = "just-lsp";
+            });
+        in
+        {
           default = pkgs.mkShell {
+            PYTHON_CMD = lib.getExe customPython;
             name = "plot-primes";
             packages = [
               pkgs.just
-              pkgs.just-lsp
+              (pkgs.callPackage just-lsp { })
               pkgs.pyright
               pkgs.ruff
               pkgs.uv
-              (pkgs.python3.withPackages (
-                python-pkgs: with python-pkgs; [
-                  self.packages.${system}.plotprimes-lib
-                  build
-                  matplotlib
-                  twine
-                ]
-              ))
+              customPython
             ];
           };
         }

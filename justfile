@@ -24,6 +24,6 @@ make-nix-script:
 build: test make-nix-script
     {{ pythonCmd }} -m build --installer uv
 
-[confirm("Are you sure you want to upload to pypi?")]
+[confirm("Are you sure you want to upload to PyPI?")]
 upload token=env("TWINE_TOKEN") repo="pypi": build
-    {{ pythonCmd }} -m twine upload -u __token__ -p '{{ token }}' -r '{{ repo }}' dist/*
+    @{{ pythonCmd }} -m twine upload -u __token__ -p '{{ token }}' -r '{{ repo }}' dist/*

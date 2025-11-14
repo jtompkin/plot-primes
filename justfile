@@ -11,17 +11,19 @@ nixShebang := '''
 ''' + '#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/' + nixpkgsRev + ".tar.gz\n" + '''
     # This is a reproducible interpreted script that only requires Nix to run.
     # See: https://nix.dev/tutorials/first-steps/reproducible-scripts.html'''
+pythonCmd := env("PYTHON_CMD", "python3")
 
 test:
-    PYTHONPATH=src python tests/test_plotprimes.py -v
+    {{ pythonCmd }} tests/test_plotprimes.py -v
 
 make-nix-script:
-    printf "%s\n" "{{ nixShebang }}" >{{ nixScriptFile }}
-    tail -n+2 src/plotprimes/plotprimes.py >>{{ nixScriptFile }}
-    chmod +x {{ nixScriptFile }}
+    printf "%s\n" "{{ nixShebang }}" > "{{ nixScriptFile }}"
+    tail -n+2 src/plotprimes/plotprimes.py >> "{{ nixScriptFile }}"
+    chmod +x "{{ nixScriptFile }}"
 
 build: test make-nix-script
-    python -m build --installer uv
+    {{ pythonCmd }} -m build --installer uv
 
-upload token repo="pypi": build
-    python -m twine upload -u __token__ -p '{{ token }}' -r '{{ repo }}' dist/*
+[confirm("Are you sure you want to upload to pypi?")]
+upload token=env("TWINE_TOKEN") repo="pypi": build
+    {{ pythonCmd }} -m twine upload -u __token__ -p '{{ token }}' -r '{{ repo }}' dist/*

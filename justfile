@@ -14,7 +14,7 @@ nixShebang := '''
 pythonCmd := env("PYTHON_CMD", "python3")
 
 test:
-    {{ pythonCmd }} tests/test_plotprimes.py -v
+    PYTHONPATH=src {{ pythonCmd }} tests/test_plotprimes.py -v
 
 make-nix-script:
     printf "%s\n" "{{ nixShebang }}" > "{{ nixScriptFile }}"

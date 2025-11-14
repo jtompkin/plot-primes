@@ -21,7 +21,12 @@ make-nix-script:
     tail -n+2 src/plotprimes/plotprimes.py >> "{{ nixScriptFile }}"
     chmod +x "{{ nixScriptFile }}"
 
-build: test make-nix-script
+clean-dist:
+    mkdir -p dist.old
+    cp -a dist/{*.whl,*.tar.gz} dist.old
+    rm -f dist/{*.whl,*.tar.gz}
+
+build: test make-nix-script clean-dist
     {{ pythonCmd }} -m build --installer uv
 
 [confirm("Are you sure you want to upload to PyPI?")]
